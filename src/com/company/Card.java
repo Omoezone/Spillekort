@@ -1,35 +1,42 @@
 package com.company;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Stack;
 
 public class Card extends Deck {
-    private ArrayList<String> cardGame;
+    private Stack cardGame;
 
-    Card(ArrayList<String> cardGame){
-        this.cardGame = cardGame;
+    Card(){
+        this.cardGame = new Stack();
+        shuffleCard();
     }
-
-    public ArrayList<String> getCardGame() {
+    public Stack getCardGame() {
         return cardGame;
     }
 
-    public void setCardGame(ArrayList<String> cardGame) {
+    public void Stack(Stack stack) {
         this.cardGame = cardGame;
     }
+    public int size(){
+        int count = 0;
+        for(Object card: cardGame){
+            count++;
+        }
+        return count;
+    }
 
-    Card shuffleCard(Card card){
-        //ArrayList<String> temp = new ArrayList<>();
+    public void shuffleCard(){
         String[] suits = {"Spar","klør","rude","Hjerte"};
         String[] number = {"1","2","3","4","5","6","7","8","9","10","11","12","13"};
         for(int i = 0; i < 4; i++){
             for(int h = 0; h < number.length;h++){
-                card.getCardGame().add(number[h] + " " + suits[i]);
+                cardGame.push(number[h] + " " + suits[i]);
             }
         }
-        Collections.shuffle(card.getCardGame());
-        return card;
+        Collections.shuffle(cardGame);
     }
 
+    @Override
+    public String toString() {
+        return "cardGame= " + cardGame;
+    }
 }
