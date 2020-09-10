@@ -1,42 +1,28 @@
 package com.company;
-import java.util.Collections;
-import java.util.Stack;
 
-public class Card extends Deck {
-    private Stack cardGame;
+import java.util.Objects;
 
-    Card(){
-        this.cardGame = new Stack();
-        shuffleCard();
-    }
-    public Stack getCardGame() {
-        return cardGame;
+public class Card implements Comparable<Card> {
+    private final Type value;
+    private final Trumf trumf;
+
+    Card(Type value, Trumf trumf){
+        this.value = value;
+        this.trumf = trumf;
     }
 
-    public void Stack(Stack stack) {
-        this.cardGame = cardGame;
-    }
-    public int size(){
-        int count = 0;
-        for(Object card: cardGame){
-            count++;
+    @Override
+    public int compareTo(Card o) {
+        if (this.value != o.value) {
+            return this.value.compareTo(o.value);
+        } else {
+            return this.trumf.compareTo(o.trumf);
         }
-        return count;
-    }
-
-    public void shuffleCard(){
-        String[] suits = {"Spar","klør","rude","Hjerte"};
-        String[] number = {"1","2","3","4","5","6","7","8","9","10","11","12","13"};
-        for(int i = 0; i < 4; i++){
-            for(int h = 0; h < number.length;h++){
-                cardGame.push(number[h] + " " + suits[i]);
-            }
-        }
-        Collections.shuffle(cardGame);
     }
 
     @Override
     public String toString() {
-        return "cardGame= " + cardGame;
+        return  value +
+                " " + trumf;
     }
 }
